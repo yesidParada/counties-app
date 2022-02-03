@@ -1,0 +1,46 @@
+<h2>{{ title}}</h2>
+<hr>
+<div class="row">
+    <div class="col">
+        <form (ngSubmit)="search()" autocomplete="off">
+            <input 
+                type="text"
+                placeholder="Search..."
+                class="form-control"
+                [(ngModel)]="valueSearch"
+                name="search">
+        </form>
+    </div>
+</div>
+<hr>
+<div *ngIf="visibleError" class="alert alert-danger">
+    not data
+</div>
+<div *ngIf="countriesList.length > 0" class="row">
+    <div class="col">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>flag</th>
+                    <th>name</th>
+                    <th>population</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let country of countriesList; index as i">
+                    <td>{{ i + 1 }}</td>
+                    <td>
+                        <img class="small-flag" [src]="country.flags.png" [alt]="country.name.common">
+                    </td>
+                    <td>{{ country.name.common }}</td>
+                    <td>{{ country.population | number }}</td>
+                    <td>
+                        <a [routerLink]="['/country', country.cca2]">see more...</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
